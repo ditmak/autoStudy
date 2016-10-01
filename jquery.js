@@ -23,7 +23,7 @@
     var exp = new Date();    
 	var value = get_cookie(name);
     exp.setTime(exp.getTime() - 1000);  
-    document.cookie     = name + "="+ escape (value) + ";expires=" + exp.toGMTString();    
+    document.cookie     = name + "="+ 'sadfsaf' + ";expires=" + exp.toGMTString();    
 	} 
 	var oriXMLOPEN = XMLHttpRequest.prototype.open;
 	XMLHttpRequest.prototype.open=function(method,url,asyncFlag,user,password){
