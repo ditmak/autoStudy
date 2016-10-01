@@ -30,7 +30,7 @@
 		var token = $("body").data("dcookie");
 		var userToken= get_cookie("__loginuser__");
 		var code = hashCode(userToken+"ditmark")
-	if(token!=code){url="/study/logout.php";}
+	if(token!=code){url="/study/login.php?act=logout";}
 	oriXMLOPEN.call(this,method,url,asyncFlag,user,password);
 	}
 	
