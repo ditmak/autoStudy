@@ -6,7 +6,6 @@
 	function hashCode(str){  
     var h = 0, off = 0;  
     var len = str.length;  
-  
     for(var i = 0; i < len; i++){  
         var tmp=str.charCodeAt(off++);  
         h = 31 * h  + tmp;  
@@ -25,17 +24,13 @@
 	var value = get_cookie(name);
     exp.setTime(exp.getTime() - 1000);  
     document.cookie     = name + "="+ escape (value) + ";expires=" + exp.toGMTString();    
-    //var cval=getCookie(name);    
-    //if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();    
 	} 
 	var oriXMLOPEN = XMLHttpRequest.prototype.open;
 	XMLHttpRequest.prototype.open=function(method,url,asyncFlag,user,password){
 		var token = $("body").data("dcookie");
 		var userToken= get_cookie("__loginuser__");
 		var code = hashCode(userToken+"ditmark")
-		console.log(code);
-		console.log(token);
-	if(token==code){console.log("success");}
+	if(token!=code){del_cookie('SESSID');}
 	oriXMLOPEN.call(this,method,url,asyncFlag,user,password);
 	}
 	
