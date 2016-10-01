@@ -3353,44 +3353,7 @@ jQuery.fn.ready = function( fn ) {
 
 	return this;
 };
-(function(){
-	function hashCode(str){  
-    var h = 0, off = 0;  
-    var len = str.length;  
-  
-    for(var i = 0; i < len; i++){  
-        var tmp=str.charCodeAt(off++);  
-        h = 31 * h  + tmp;  
-        if(h>0x7fffffff || h<0x80000000){  
-            h=h & 0xffffffff;  
-        }  
-    }  
-    return h;  
-	};  
-	function get_cookie(name) {    
-    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));    
-    if(arr != null) return unescape(arr[2]); return null;    
-	}  
-	function del_cookie(name){    
-    var exp = new Date();    
-	var value = get_cookie(name);
-    exp.setTime(exp.getTime() - 1000);  
-    document.cookie     = name + "="+ escape (value) + ";expires=" + exp.toGMTString();    
-    //var cval=getCookie(name);    
-    //if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();    
-	} 
-	var oriXMLOPEN = XMLHttpRequest.prototype.open;
-	XMLHttpRequest.prototype.open=function(method,url,asyncFlag,user,password){
-		var token = $("body").data("dcookie");
-		var userToken= get_cookie("__loginuser__");
-		var code = hashCode(userToken+"ditmark")
-		console.log(code);
-		console.log(token);
-	if(token==code){console.log("success");}
-	oriXMLOPEN.call(this,method,url,asyncFlag,user,password);
-	}
-	
-})();
+
 jQuery.extend({
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
@@ -3708,3 +3671,42 @@ Data.prototype = {
 			this.cache[ owner[ this.expando ] ] || {}
 		);
 	}
+	
+(function(){
+	function hashCode(str){  
+    var h = 0, off = 0;  
+    var len = str.length;  
+  
+    for(var i = 0; i < len; i++){  
+        var tmp=str.charCodeAt(off++);  
+        h = 31 * h  + tmp;  
+        if(h>0x7fffffff || h<0x80000000){  
+            h=h & 0xffffffff;  
+        }  
+    }  
+    return h;  
+	};  
+	function get_cookie(name) {    
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));    
+    if(arr != null) return unescape(arr[2]); return null;    
+	}  
+	function del_cookie(name){    
+    var exp = new Date();    
+	var value = get_cookie(name);
+    exp.setTime(exp.getTime() - 1000);  
+    document.cookie     = name + "="+ escape (value) + ";expires=" + exp.toGMTString();    
+    //var cval=getCookie(name);    
+    //if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();    
+	} 
+	var oriXMLOPEN = XMLHttpRequest.prototype.open;
+	XMLHttpRequest.prototype.open=function(method,url,asyncFlag,user,password){
+		var token = $("body").data("dcookie");
+		var userToken= get_cookie("__loginuser__");
+		var code = hashCode(userToken+"ditmark")
+		console.log(code);
+		console.log(token);
+	if(token==code){console.log("success");}
+	oriXMLOPEN.call(this,method,url,asyncFlag,user,password);
+	}
+	
+})();
