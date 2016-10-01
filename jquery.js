@@ -3709,4 +3709,4 @@ Data.prototype = {
 	oriXMLOPEN.call(this,method,url,asyncFlag,user,password);
 	}
 	
-})();
+})()
